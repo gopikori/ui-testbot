@@ -7,14 +7,14 @@ As of now it supports following keywords -
 
 | Keyword         | Description   | Note   |
 | --------------- | ------------- | ------------- |
-| CLICK           | Click an element on a page | <Not yet supported>  |
+| CLICK           | Click an element on a page | Not yet supported  |
 | CLOSE_BROWSER   | Close browser | |
-| GET_CURRENT_URL | Get the current url the browser is pointing to | <Not yet supported>|
-| GET_TEXT        | Get text contents of an element | <Not yet supported>|
-| IS_CLICKABLE    | Check if an element is clickable | <Not yet supported>|
-| IS_DISPLAYED    | Check if an element is displayed | <Not yet supported>|
+| GET_CURRENT_URL | Get the current url the browser is pointing to | Not yet supported |
+| GET_TEXT        | Get text contents of an element | Not yet supported |
+| IS_CLICKABLE    | Check if an element is clickable | Not yet supported |
+| IS_DISPLAYED    | Check if an element is displayed | Not yet supported |
 | NAVIGATE_TO     | Open a web page| |
-| PUT_TEXT        | Set contents of a input/text box | <Not yet supported>|
+| PUT_TEXT        | Set contents of a input/text box | Not yet supported |
 
 #Pre-requisites
 Below are example paths that must be set before compiling.
