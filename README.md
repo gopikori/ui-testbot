@@ -40,4 +40,8 @@ To print help -
 
 Notes :-
 	
-> Tag #END required in master as well as test cases sheet
+> Tag #END required in test cases sheet to mark end of the test cases.
+
+# License
+
+UI Test Bot is released under Apache 2.0 License.
