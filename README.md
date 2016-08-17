@@ -7,7 +7,7 @@ As of now it supports following keywords -
 
 | Keyword         | Description   | Note   |
 | --------------- | ------------- | ------------- |
-| CLICK           | Click an element on a page | Not yet supported  |
+| CLICK           | Click an element on a page | |
 | CLOSE_BROWSER   | Close browser | |
 | GET_CURRENT_URL | Get the current url the browser is pointing to | Not yet supported |
 | GET_TEXT        | Get text contents of an element | Not yet supported |
