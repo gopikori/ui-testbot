@@ -15,17 +15,7 @@ public class TestResult {
 
   @Override
   public String toString() {
-    return null;
-//    String result = isSuccess ? "Success" : "Failure";
-//    String trimmedResultStatement = (resultStatement != null && resultStatement.length() > 30) ? resultStatement.substring(0, 30) + "..." : resultStatement;
-//    String logString = "[" + testCase.id + "](" + testCase.name + ") " + testStepNo + " " + testStep + ": "
-//        + "\t RESULT=" + result + " (" + trimmedResultStatement + ")";
-//    
-//    return logString;
-  
+    return "TestResult [isSuccess=" + isSuccess + ", resultStatement=" + resultStatement + "]";
   }
-  
-  
 
-  
 }

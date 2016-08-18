@@ -18,7 +18,7 @@ public class ClickHandler extends KeywordHandler {
   public WebDriver handle() throws Exception {
     WebDriverWait wait = new WebDriverWait(driver,5);
     
-    switch (testStep.locatorType) {
+    switch (testStep.locatorType.toLowerCase()) {
     case "xpath":
       wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(testStep.locatorValue)));    
       driver.findElement(By.xpath(testStep.locatorValue)).click();

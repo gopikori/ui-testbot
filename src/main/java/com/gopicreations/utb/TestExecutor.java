@@ -13,6 +13,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
 import org.openqa.selenium.remote.DesiredCapabilities;
 
+import com.gopicreations.utb.handlers.CheckCurrentUrlHandler;
 import com.gopicreations.utb.handlers.ClickHandler;
 import com.gopicreations.utb.handlers.CloseBrowserHandler;
 import com.gopicreations.utb.handlers.KeywordHandler;
@@ -35,6 +36,7 @@ public class TestExecutor {
     handlers.add(new NavigateToHandler());
     handlers.add(new CloseBrowserHandler());
     handlers.add(new ClickHandler());
+    handlers.add(new CheckCurrentUrlHandler());
 
     handlers.forEach(handler -> {keywordHandlers.put(handler.getKeyword(), handler);});
     
@@ -65,13 +67,14 @@ public class TestExecutor {
         logger.info("######## Execuing test case:[" + testCase.id + "]" + testCase.name);
 
         for (TestStep step : testCase.steps) {
-          logger.info("  ######## Execuing test step:[" + step.id + "]" + step.name);
+          logger.info("  ###### Execuing test step:[" + step.id + "]" + step.name);
           try {
             KeywordHandler handler = keywordHandlers.get(step.keyword);
 
             if (handler != null) {
               handler.init(testCase, step, driver, testResult);
               driver = handler.handle();
+              logger.debug("Result=" + testResult);
             } else {
               logger.warn("Unsupported/Excluded Keyword: " + step.keyword);
             }
