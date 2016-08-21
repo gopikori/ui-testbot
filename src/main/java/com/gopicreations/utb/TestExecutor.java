@@ -16,6 +16,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import com.gopicreations.utb.handlers.CheckCurrentUrlHandler;
 import com.gopicreations.utb.handlers.ClickHandler;
 import com.gopicreations.utb.handlers.CloseBrowserHandler;
+import com.gopicreations.utb.handlers.IsClickableHandler;
 import com.gopicreations.utb.handlers.KeywordHandler;
 import com.gopicreations.utb.handlers.NavigateToHandler;
 import com.gopicreations.utb.parser.XlsReader;
@@ -37,6 +38,7 @@ public class TestExecutor {
     handlers.add(new CloseBrowserHandler());
     handlers.add(new ClickHandler());
     handlers.add(new CheckCurrentUrlHandler());
+    handlers.add(new IsClickableHandler());
 
     handlers.forEach(handler -> {keywordHandlers.put(handler.getKeyword(), handler);});
     
@@ -67,7 +69,7 @@ public class TestExecutor {
         logger.info("######## Execuing test case:[" + testCase.id + "]" + testCase.name);
 
         for (TestStep step : testCase.steps) {
-          logger.info("  ###### Execuing test step:[" + step.id + "]" + step.name);
+          logger.info("  ###### Execuing test step:[" + step.id + "]" + step.keyword + ":" + step.name);
           try {
             KeywordHandler handler = keywordHandlers.get(step.keyword);
 

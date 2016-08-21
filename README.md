@@ -11,7 +11,7 @@ As of now it supports following keywords -
 | CLOSE_BROWSER   | Close browser | |
 | CHECK_CURRENT_URL | Get and verify the current url the browser is pointing to. Supports 'match' and 'contains' | |
 | GET_TEXT        | Get text contents of an element | Not yet supported |
-| IS_CLICKABLE    | Check if an element is clickable | Not yet supported |
+| IS_CLICKABLE    | Check if an element is clickable | |
 | IS_DISPLAYED    | Check if an element is displayed | Not yet supported |
 | NAVIGATE_TO     | Open a web page| |
 | PUT_TEXT        | Set contents of a input/text box | Not yet supported |
