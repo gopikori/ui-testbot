@@ -6,8 +6,18 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.gopicreations.utb.Keyword;
+import com.gopicreations.utb.TestCase;
+import com.gopicreations.utb.TestStep;
+import com.gopicreations.utb.result.TestResult;
 
 public class ClickHandler extends KeywordHandler {
+  
+  public ClickHandler() {
+  }
+
+  public ClickHandler(TestCase testCase, TestStep testStep, WebDriver driver, TestResult testResult) {
+    super(testCase, testStep, driver, testResult);
+  }
 
   @Override
   public Keyword getKeyword() {
@@ -16,20 +26,20 @@ public class ClickHandler extends KeywordHandler {
 
   @Override
   public WebDriver handle() throws Exception {
-    WebDriverWait wait = new WebDriverWait(driver,5);
+    WebDriverWait wait = new WebDriverWait(getDriver(),5);
     
-    switch (testStep.locatorType.toLowerCase()) {
+    switch (getTestStep().locatorType.toLowerCase()) {
     case "xpath":
-      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(testStep.locatorValue)));    
-      driver.findElement(By.xpath(testStep.locatorValue)).click();
-      testResult.isSuccess = true;
-      testResult.resultStatement = "Clicked";
+      wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(getTestStep().locatorValue)));    
+      getDriver().findElement(By.xpath(getTestStep().locatorValue)).click();
+      getTestResult().isSuccess = true;
+      getTestResult().resultStatement = "Clicked";
       break;
     default:
-      testResult.resultStatement = "Unsupported locatorType:" + testStep.locatorType;
-      logger.warn("Unsupported locatorType:" + testStep.locatorType);
+      getTestResult().resultStatement = "Unsupported locatorType:" + getTestStep().locatorType;
+      logger.warn("Unsupported locatorType:" + getTestStep().locatorType);
     }
-    return driver;
+    return getDriver();
   }
 
 }

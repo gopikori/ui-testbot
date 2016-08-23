@@ -10,10 +10,10 @@ import com.gopicreations.utb.result.TestResult;
 
 public abstract class KeywordHandler {
 
-  protected TestCase testCase;
-  protected TestStep testStep;
-  protected WebDriver driver;
-  protected TestResult testResult;
+  private TestCase testCase;
+  private TestStep testStep;
+  private WebDriver driver;
+  private TestResult testResult;
   
   protected Logger logger = Logger.getLogger(getClass());
   
@@ -21,10 +21,30 @@ public abstract class KeywordHandler {
   
   abstract public WebDriver handle() throws Exception;
   
-  public void init(TestCase testCase, TestStep testStep, WebDriver driver, TestResult testResult) {
+  public KeywordHandler() {
+  }
+
+  public KeywordHandler(TestCase testCase, TestStep testStep, WebDriver driver, TestResult testResult) {
     this.testCase = testCase;
     this.testStep = testStep;
     this.driver = driver;
     this.testResult = testResult;
   }
+
+  public TestCase getTestCase() {
+    return testCase;
+  }
+
+  public TestStep getTestStep() {
+    return testStep;
+  }
+
+  public WebDriver getDriver() {
+    return driver;
+  }
+
+  public TestResult getTestResult() {
+    return testResult;
+  }
+  
 }

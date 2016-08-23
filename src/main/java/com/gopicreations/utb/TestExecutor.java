@@ -2,6 +2,7 @@ package com.gopicreations.utb;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,22 +27,23 @@ public class TestExecutor {
 
   private List<TestCase> testCases;
   
-  private Map<Keyword, KeywordHandler> keywordHandlers = new HashMap<>();
+  private Map<Keyword, Class<? extends KeywordHandler>> keywordHandlers = new HashMap<>();
   
   private Logger logger = Logger.getLogger(XlsReader.class);
 
-  public TestExecutor(List<TestCase> testCases) {
+  public TestExecutor(List<TestCase> testCases) throws Exception {
     this.testCases = testCases;
     
-    List<KeywordHandler> handlers = new ArrayList<>();
-    handlers.add(new NavigateToHandler());
-    handlers.add(new CloseBrowserHandler());
-    handlers.add(new ClickHandler());
-    handlers.add(new CheckCurrentUrlHandler());
-    handlers.add(new IsClickableHandler());
+    List<Class<? extends KeywordHandler>> handlers = new ArrayList<>();
+    handlers.add(NavigateToHandler.class);
+    handlers.add(CloseBrowserHandler.class);
+    handlers.add(ClickHandler.class);
+    handlers.add(CheckCurrentUrlHandler.class);
+    handlers.add(IsClickableHandler.class);
 
-    handlers.forEach(handler -> {keywordHandlers.put(handler.getKeyword(), handler);});
-    
+    for (Class<? extends KeywordHandler> handler : handlers) {
+      keywordHandlers.put(handler.newInstance().getKeyword(), handler);
+    }
     logger.info("All Active Handlers : " + keywordHandlers);
   }
 
@@ -71,10 +73,11 @@ public class TestExecutor {
         for (TestStep step : testCase.steps) {
           logger.info("  ###### Execuing test step:[" + step.id + "]" + step.keyword + ":" + step.name);
           try {
-            KeywordHandler handler = keywordHandlers.get(step.keyword);
+            Class<? extends KeywordHandler> handlerClass = keywordHandlers.get(step.keyword);
 
-            if (handler != null) {
-              handler.init(testCase, step, driver, testResult);
+            if (handlerClass != null) {
+              Constructor<? extends KeywordHandler> handlerConstructor = handlerClass.getDeclaredConstructor(TestCase.class, TestStep.class, WebDriver.class, TestResult.class);
+              KeywordHandler handler = handlerConstructor.newInstance(testCase, step, driver, testResult);
               driver = handler.handle();
               logger.debug("Result=" + testResult);
             } else {
